@@ -3,7 +3,7 @@ import Hero from '@/components/Hero';
 import Services from '@/components/Services';
 import BookingForm from '@/components/BookingForm';
 import Footer from '@/components/Footer';
-import WhatsAppFloat from '@/components/WhatsAppFloat';
+import SMSFloat from '@/components/SMSFloat';
 
 export default function Home() {
   return (
@@ -14,7 +14,7 @@ export default function Home() {
       <BookingForm />
       {/* Optional: Add Testimonials or About section here if needed */}
       <Footer />
-      <WhatsAppFloat />
+      <SMSFloat />
     </main>
   );
 }

@@ -49,7 +49,7 @@ export default function Hero() {
         </h1>
         
         <p ref={textRef} className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto font-light">
-          Experience the profound healing art of Tantric Massage in Massachusetts. 
+          Experience the profound healing art of Tantric Massage in Lowell, Middlesex County, MA. 
           A journey of deep relaxation, connection, and spiritual renewal awaits you.
         </p>
         

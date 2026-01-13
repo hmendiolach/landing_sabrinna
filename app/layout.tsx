@@ -16,9 +16,9 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://landing.sabrinnamassges.com'),
-  title: "Sabrina Tantric Massage & Wellness | Exclusive Experience",
-  description: "Discover the healing power of Tantric Massage. Professional wellness services in Massachusetts. Book your exclusive session today.",
-  keywords: "tantric massage, wellness, massachusetts, relaxation, energy healing, sensual massage",
+  title: "Sabrina Tantric Massage | Lowell, Middlesex County, MA",
+  description: "Discover the healing power of Tantric Massage in Lowell, Middlesex County, MA. Professional wellness services. Book your exclusive session today.",
+  keywords: "tantric massage, wellness, lowell, middlesex county, ma, massachusetts, relaxation, energy healing, sensual massage",
   icons: {
     icon: "/logo-white.svg",
   },
@@ -44,10 +44,11 @@ const jsonLd = {
   "@type": "HealthAndBeautyBusiness",
   "name": "Sabrina Tantric Massage & Wellness",
   "image": "https://landing.sabrinnamassges.com/social-logo.png",
-  "description": "Professional tantric massage and wellness services in Massachusetts.",
+  "description": "Professional tantric massage and wellness services in Lowell, Middlesex County, MA.",
   "telephone": "+1-617-655-4053",
   "address": {
     "@type": "PostalAddress",
+    "addressLocality": "Lowell",
     "addressRegion": "MA",
     "addressCountry": "US"
   },

@@ -15,7 +15,7 @@ export default function Footer() {
         </div>
         
         <p className="text-gray-400 mb-6 max-w-md mx-auto">
-          Professional Tantric Massage & Wellness services in Massachusetts. 
+          Professional Tantric Massage & Wellness services in Lowell, Middlesex County, MA. 
           Dedicated to your relaxation and personal growth.
         </p>
         
