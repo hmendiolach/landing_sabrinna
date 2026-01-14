@@ -68,7 +68,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${playfair.variable} antialiased bg-brand-dark text-white`}
       >
-        <script
+        <Script
+          id="json-ld"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
