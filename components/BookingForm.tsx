@@ -49,14 +49,15 @@ export default function BookingForm() {
             
             <div className="flex flex-col">
               <label className="text-sm font-medium text-gray-400 mb-2">City</label>
-              <input 
-                type="text" 
+              <select 
                 name="user_city" 
                 required 
-                defaultValue="Lowell"
-                className="bg-brand-dark border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-brand-gold transition-colors"
-                placeholder="Lowell"
-              />
+                className="bg-brand-dark border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-brand-gold transition-colors appearance-none"
+              >
+                <option value="Lowell">Lowell</option>
+                <option value="Stoneham">Stoneham</option>
+                <option value="Saugus">Saugus</option>
+              </select>
             </div>
           </div>
 
