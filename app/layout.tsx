@@ -15,7 +15,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://landing.sabrinnamassges.com'),
+  metadataBase: new URL('https://landing.sabrinnamassage.com'),
   title: "Sabrina Tantric Massage | Lowell, Middlesex County, MA",
   description: "Discover the healing power of Tantric Massage in Lowell, Middlesex County, MA. Professional wellness services. Book your exclusive session today.",
   keywords: "tantric massage, wellness, lowell, middlesex county, ma, massachusetts, relaxation, energy healing, sensual massage",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Sabrina Tantric Massage | Exclusive Experience",
     description: "Journey into deep relaxation and sensual awakening.",
-    url: "https://landing.sabrinnamassges.com",
+    url: "https://landing.sabrinnamassage.com",
     siteName: "Sabrina Tantric Massage",
     images: [
       {
@@ -43,7 +43,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "HealthAndBeautyBusiness",
   "name": "Sabrina Tantric Massage & Wellness",
-  "image": "https://landing.sabrinnamassges.com/social-logo.png",
+  "image": "https://landing.sabrinnamassage.com/social-logo.png",
   "description": "Professional tantric massage and wellness services in Lowell, Middlesex County, MA.",
   "telephone": "+1-617-655-4053",
   "address": {
@@ -53,7 +53,7 @@ const jsonLd = {
     "addressCountry": "US"
   },
   "priceRange": "$$",
-  "url": "https://landing.sabrinnamassges.com"
+  "url": "https://landing.sabrinnamassage.com"
 };
 
 export default function RootLayout({
@@ -71,16 +71,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         {children}
-        <GoogleAnalytics gaId="G-XXXXXXXXXX" /> {/* Reemplaza G-XXXXXXXXXX con tu ID real */}
-        <Script id="microsoft-clarity" strategy="afterInteractive">
-          {`
-            (function(c,l,a,r,i,t,y){
-                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-            })(window, document, "clarity", "script", "YOUR_CLARITY_ID");
-          `}
-        </Script>
+        <GoogleAnalytics gaId="G-SJ3VFHG8KJ" />
       </body>
     </html>
   );

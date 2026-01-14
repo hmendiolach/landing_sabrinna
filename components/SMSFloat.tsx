@@ -4,7 +4,7 @@ import { FaSms } from 'react-icons/fa';
 
 export default function SMSFloat() {
   const phoneNumber = "+16176554053";
-  const message = "Hi Sabrina, I would like to book a massage session in Lowell.";
+  const message = "Hi Sabrina, I would like more information about your massage services.";
   const encodedMessage = encodeURIComponent(message);
 
   return (
