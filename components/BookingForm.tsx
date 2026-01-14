@@ -1,37 +1,25 @@
 "use client";
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import emailjs from '@emailjs/browser';
 import { FaCalendarAlt } from 'react-icons/fa';
 
 export default function BookingForm() {
-  const form = useRef<HTMLFormElement>(null);
   const [startDate, setStartDate] = useState<Date | null>(new Date());
-  const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
-
-  const sendEmail = (e: React.FormEvent) => {
+  
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
-
-    if (form.current) {
-      emailjs.sendForm(
-        'service_c9g79gq',
-        'template_66r33s9',
-        form.current,
-        'user_4X4X4X4X4X4X4X4X4X4X4' // Nota: Necesitas reemplazar esto con tu Public Key real de EmailJS
-      )
-      .then((result) => {
-          setLoading(false);
-          setStatus('success');
-          if(form.current) form.current.reset();
-      }, (error) => {
-          setLoading(false);
-          setStatus('error');
-          console.error(error.text);
-      });
-    }
+    const form = e.currentTarget;
+    const name = (form.elements.namedItem('user_name') as HTMLInputElement).value;
+    const city = (form.elements.namedItem('user_city') as HTMLInputElement).value;
+    const date = startDate ? startDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : 'a future date';
+    
+    // Construct SMS message in English as requested
+    // "Hi Sabrina, my name is [Name], I would like to book a massage session for [Date] in [City]."
+    const message = `Hi Sabrina, my name is ${name}. I would like to book a massage session for ${date} in ${city}.`;
+    
+    // Open SMS app
+    window.location.href = `sms:+16176554053?&body=${encodeURIComponent(message)}`;
   };
 
   return (
@@ -41,11 +29,11 @@ export default function BookingForm() {
           <h2 className="text-3xl md:text-5xl font-serif font-bold text-white mb-4">Book Your Session</h2>
           <div className="w-20 h-1 bg-brand-gold mx-auto"></div>
           <p className="mt-4 text-gray-300">
-            Fill out the form below to request your exclusive appointment.
+            Fill out the form below to request your appointment via SMS.
           </p>
         </div>
 
-        <form ref={form} onSubmit={sendEmail} className="bg-brand-gray p-8 md:p-12 rounded-2xl shadow-2xl border border-white/5">
+        <form onSubmit={handleSubmit} className="bg-brand-gray p-8 md:p-12 rounded-2xl shadow-2xl border border-white/5">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div className="flex flex-col">
               <label className="text-sm font-medium text-gray-400 mb-2">Full Name</label>
@@ -57,74 +45,44 @@ export default function BookingForm() {
                 placeholder="John Doe"
               />
             </div>
+            
             <div className="flex flex-col">
-              <label className="text-sm font-medium text-gray-400 mb-2">Phone Number</label>
+              <label className="text-sm font-medium text-gray-400 mb-2">City</label>
               <input 
-                type="tel" 
-                name="user_phone" 
+                type="text" 
+                name="user_city" 
                 required 
+                defaultValue="Lowell"
                 className="bg-brand-dark border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-brand-gold transition-colors"
-                placeholder="+1 (555) 000-0000"
+                placeholder="Lowell"
               />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <div className="flex flex-col">
-              <label className="text-sm font-medium text-gray-400 mb-2">Email Address</label>
-              <input 
-                type="email" 
-                name="user_email" 
-                required 
-                className="bg-brand-dark border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-brand-gold transition-colors"
-                placeholder="john@example.com"
-              />
-            </div>
-            <div className="flex flex-col">
-              <label className="text-sm font-medium text-gray-400 mb-2">Preferred Date</label>
-              <div className="relative">
-                <DatePicker 
-                  selected={startDate} 
-                  onChange={(date: Date | null) => setStartDate(date)} 
-                  className="w-full bg-brand-dark border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-brand-gold transition-colors"
-                  wrapperClassName="w-full"
-                  name="booking_date"
-                  dateFormat="MMMM d, yyyy"
-                />
-                <FaCalendarAlt className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 pointer-events-none" />
-              </div>
             </div>
           </div>
 
           <div className="flex flex-col mb-8">
-            <label className="text-sm font-medium text-gray-400 mb-2">Message (Optional)</label>
-            <textarea 
-              name="message" 
-              rows={4}
-              className="bg-brand-dark border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-brand-gold transition-colors resize-none"
-              placeholder="Any specific requests or questions?"
-            ></textarea>
+            <label className="text-sm font-medium text-gray-400 mb-2">Preferred Date</label>
+            <div className="relative">
+              <DatePicker 
+                selected={startDate} 
+                onChange={(date: Date | null) => setStartDate(date)} 
+                className="w-full bg-brand-dark border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-brand-gold transition-colors"
+                wrapperClassName="w-full"
+                dateFormat="MMMM d, yyyy"
+              />
+              <FaCalendarAlt className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 pointer-events-none" />
+            </div>
           </div>
 
           <button 
             type="submit" 
-            disabled={loading}
-            className={`w-full py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-[1.02] ${loading ? 'bg-gray-600 cursor-not-allowed' : 'bg-brand-gold hover:bg-brand-gold-hover text-brand-dark'}`}
+            className="w-full bg-brand-gold hover:bg-brand-gold-hover text-brand-dark py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-[1.02] shadow-[0_0_20px_rgba(198,168,124,0.3)]"
           >
-            {loading ? 'Sending...' : 'Confirm Booking Request'}
+            Send Booking Request (SMS)
           </button>
-
-          {status === 'success' && (
-            <div className="mt-4 p-4 bg-green-500/20 text-green-400 rounded-lg text-center border border-green-500/30">
-              Request sent successfully! We will contact you shortly.
-            </div>
-          )}
           
-          {status === 'error' && (
-            <div className="mt-4 p-4 bg-red-500/20 text-red-400 rounded-lg text-center border border-red-500/30">
-              Something went wrong. Please try again or contact us via WhatsApp.
-            </div>
-          )}
+          <p className="mt-4 text-center text-sm text-gray-500">
+            Clicking this button will open your messaging app with a pre-filled text.
+          </p>
         </form>
       </div>
     </section>
