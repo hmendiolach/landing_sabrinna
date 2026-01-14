@@ -13,10 +13,11 @@ export default function BookingForm() {
     const name = (form.elements.namedItem('user_name') as HTMLInputElement).value;
     const city = (form.elements.namedItem('user_city') as HTMLInputElement).value;
     const date = startDate ? startDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : 'a future date';
+    const time = startDate ? startDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }) : 'any time';
     
     // Construct SMS message in English as requested
-    // "Hi Sabrina, my name is [Name], I would like to book a massage session for [Date] in [City]."
-    const message = `Hi Sabrina, my name is ${name}. I would like to book a massage session for ${date} in ${city}.`;
+    // "Hi Sabrina, my name is [Name], I would like to book a massage session for [Date] at [Time] in [City]."
+    const message = `Hi Sabrina, my name is ${name}. I would like to book a massage session for ${date} at ${time} in ${city}.`;
     
     // Open SMS app
     window.location.href = `sms:+16176554053?&body=${encodeURIComponent(message)}`;
@@ -60,14 +61,17 @@ export default function BookingForm() {
           </div>
 
           <div className="flex flex-col mb-8">
-            <label className="text-sm font-medium text-gray-400 mb-2">Preferred Date</label>
+            <label className="text-sm font-medium text-gray-400 mb-2">Preferred Date & Time</label>
             <div className="relative">
               <DatePicker 
                 selected={startDate} 
                 onChange={(date: Date | null) => setStartDate(date)} 
                 className="w-full bg-brand-dark border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-brand-gold transition-colors"
                 wrapperClassName="w-full"
-                dateFormat="MMMM d, yyyy"
+                dateFormat="MMMM d, yyyy h:mm aa"
+                showTimeSelect
+                minTime={new Date(new Date().setHours(9, 0, 0))}
+                maxTime={new Date(new Date().setHours(23, 0, 0))}
               />
               <FaCalendarAlt className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 pointer-events-none" />
             </div>
