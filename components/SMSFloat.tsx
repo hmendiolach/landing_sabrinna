@@ -1,10 +1,12 @@
 "use client";
 import React from 'react';
 import { FaSms } from 'react-icons/fa';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function SMSFloat() {
+  const { dict } = useLanguage();
   const phoneNumber = "+16176554053";
-  const message = "Hi Sabrina, I would like more information about your massage services.";
+  const message = dict.smsFloat.message;
   const encodedMessage = encodeURIComponent(message);
 
   return (
@@ -15,7 +17,7 @@ export default function SMSFloat() {
     >
       <FaSms className="text-3xl" />
       <span className="absolute right-full mr-3 bg-white text-gray-800 px-3 py-1 rounded-lg text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md">
-        Text Me
+        {dict.smsFloat.hoverText}
       </span>
       
       {/* Pulse Effect */}

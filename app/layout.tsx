@@ -56,6 +56,8 @@ const jsonLd = {
   "url": "https://landing.sabrinnamassage.com"
 };
 
+import { LanguageProvider } from "@/context/LanguageContext";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -70,7 +72,9 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
         <GoogleAnalytics gaId="G-SJ3VFHG8KJ" />
       </body>
     </html>

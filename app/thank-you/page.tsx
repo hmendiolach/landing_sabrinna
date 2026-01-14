@@ -1,10 +1,14 @@
+"use client";
 import React from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { FaCheckCircle, FaArrowLeft } from 'react-icons/fa';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function ThankYou() {
+  const { dict } = useLanguage();
+  
   return (
     <main className="min-h-screen bg-brand-dark flex flex-col">
       <Navbar />
@@ -21,18 +25,18 @@ export default function ThankYou() {
           </div>
           
           <h1 className="text-3xl md:text-5xl font-serif font-bold text-white mb-6">
-            Almost There!
+            {dict.thankYou.title}
           </h1>
           
           <p className="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed">
-            Your messaging app should have opened with your booking details. 
+            {dict.thankYou.messagePart1} 
             <br />
-            <span className="text-brand-gold font-semibold">Please remember to hit "Send"</span> to finalize your request.
+            <span className="text-brand-gold font-semibold">{dict.thankYou.messagePart2}</span>
           </p>
           
           <div className="bg-brand-dark/50 p-6 rounded-lg border border-white/5 mb-8">
             <p className="text-sm text-gray-400">
-              We will review your request and get back to you shortly to confirm your appointment.
+              {dict.thankYou.subMessage}
             </p>
           </div>
 
@@ -40,7 +44,7 @@ export default function ThankYou() {
             href="/"
             className="inline-flex items-center gap-2 text-brand-gold hover:text-white transition-colors duration-300 font-medium"
           >
-            <FaArrowLeft /> Return to Home
+            <FaArrowLeft /> {dict.thankYou.backHome}
           </Link>
         </div>
       </section>

@@ -1,33 +1,50 @@
 import React from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
+import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Footer() {
+  const { dict } = useLanguage();
+
   return (
-    <footer className="bg-black py-12 border-t border-white/10">
+    <footer className="bg-brand-dark py-12 border-t border-white/10">
       <div className="container mx-auto px-6 text-center">
-        <div className="mb-6 relative h-12 w-40 mx-auto opacity-80">
+        <Link href="/" className="relative h-12 w-40 mx-auto block mb-8">
           <Image 
             src="/logo-white.svg" 
             alt="Sabrina Tantric Massage" 
             fill
             className="object-contain"
           />
-        </div>
+        </Link>
         
         <p className="text-gray-400 mb-6 max-w-md mx-auto">
-          Professional Tantric Massage & Wellness services in Lowell, Middlesex County, MA. 
-          Dedicated to your relaxation and personal growth.
+          {dict.footer.description}
         </p>
         
-        <div className="flex justify-center space-x-6 mb-8">
-          <a href="#" className="text-gray-500 hover:text-brand-gold transition-colors">Privacy Policy</a>
-          <a href="#" className="text-gray-500 hover:text-brand-gold transition-colors">Terms of Service</a>
-          <a href="#" className="text-gray-500 hover:text-brand-gold transition-colors">Contact</a>
+        <div className="flex justify-center gap-6 mb-8">
+          <a 
+            href="https://instagram.com" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-white hover:text-brand-gold transition-colors text-2xl"
+          >
+            <FaInstagram />
+          </a>
+          <a 
+            href="https://wa.me/16176554053" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-white hover:text-brand-gold transition-colors text-2xl"
+          >
+            <FaWhatsapp />
+          </a>
         </div>
         
-        <p className="text-gray-600 text-sm">
-          &copy; {new Date().getFullYear()} Sabrina Tantric Massage. All rights reserved.
-        </p>
+        <div className="text-gray-500 text-sm">
+          &copy; {new Date().getFullYear()} Sabrina Tantric Massage. {dict.footer.rights}
+        </div>
       </div>
     </footer>
   );

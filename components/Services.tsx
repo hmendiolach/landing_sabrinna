@@ -3,30 +3,32 @@ import React, { useEffect, useRef } from 'react';
 import { FaSpa, FaHeart, FaLeaf } from 'react-icons/fa';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useLanguage } from '../context/LanguageContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const services = [
-  {
-    icon: <FaSpa className="text-4xl text-brand-gold" />,
-    title: "Tantric Massage",
-    description: "A meditative and sensual massage that awakens your energy flow, promoting deep connection with your body and spirit."
-  },
-  {
-    icon: <FaLeaf className="text-4xl text-brand-gold" />,
-    title: "Deep Relaxation",
-    description: "Release chronic tension and stress. Allow your mind to quiet and your body to surrender to profound peace."
-  },
-  {
-    icon: <FaHeart className="text-4xl text-brand-gold" />,
-    title: "Energy Healing",
-    description: "Balance your chakras and restore vitality. Experience a holistic approach to wellness that nurtures your entire being."
-  }
-];
-
 export default function Services() {
+  const { dict } = useLanguage();
   const sectionRef = useRef(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  const services = [
+    {
+      icon: <FaSpa className="text-4xl text-brand-gold" />,
+      title: dict.services.tantricTitle,
+      description: dict.services.tantricDesc
+    },
+    {
+      icon: <FaLeaf className="text-4xl text-brand-gold" />,
+      title: dict.services.relaxationTitle,
+      description: dict.services.relaxationDesc
+    },
+    {
+      icon: <FaHeart className="text-4xl text-brand-gold" />,
+      title: dict.services.energyTitle,
+      description: dict.services.energyDesc
+    }
+  ];
 
   useEffect(() => {
     gsap.fromTo(cardsRef.current.filter(Boolean), 
@@ -48,10 +50,10 @@ export default function Services() {
     <section ref={sectionRef} className="py-20 bg-brand-gray relative">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-serif font-bold text-white mb-4">Our Services</h2>
+          <h2 className="text-3xl md:text-5xl font-serif font-bold text-white mb-4">{dict.services.heading}</h2>
           <div className="w-20 h-1 bg-brand-gold mx-auto"></div>
           <p className="mt-4 text-gray-300 max-w-2xl mx-auto">
-            Discover a sanctuary where ancient techniques meet modern wellness.
+            {dict.services.subheading}
           </p>
         </div>
 
