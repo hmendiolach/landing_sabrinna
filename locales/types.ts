@@ -28,6 +28,7 @@ export interface Dictionary {
     dateLabel: string;
     submitButton: string;
     helperText: string;
+    smsTemplate: string; // "Hi Sabrina, my name is {name}. I would like to book a massage session for {date} at {time} in {city}."
   };
   footer: {
     description: string;

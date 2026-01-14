@@ -7,7 +7,7 @@ import { FaCalendarAlt } from 'react-icons/fa';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function BookingForm() {
-  const { dict } = useLanguage();
+  const { dict, language } = useLanguage();
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const router = useRouter();
   
@@ -16,12 +16,15 @@ export default function BookingForm() {
     const form = e.currentTarget;
     const name = (form.elements.namedItem('user_name') as HTMLInputElement).value;
     const city = (form.elements.namedItem('user_city') as HTMLInputElement).value;
-    const date = startDate ? startDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : 'a future date';
-    const time = startDate ? startDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }) : 'any time';
+    const date = startDate ? startDate.toLocaleDateString(language === 'pt' ? 'pt-BR' : 'en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : 'a future date';
+    const time = startDate ? startDate.toLocaleTimeString(language === 'pt' ? 'pt-BR' : 'en-US', { hour: '2-digit', minute: '2-digit' }) : 'any time';
     
-    // Construct SMS message in English as requested
-    // "Hi Sabrina, my name is [Name], I would like to book a massage session for [Date] at [Time] in [City]."
-    const message = `Hi Sabrina, my name is ${name}. I would like to book a massage session for ${date} at ${time} in ${city}.`;
+    // Construct SMS message using the localized template
+    const message = dict.booking.smsTemplate
+      .replace('{name}', name)
+      .replace('{date}', date)
+      .replace('{time}', time)
+      .replace('{city}', city);
     
     // Open SMS app
     window.location.href = `sms:+16176554053?&body=${encodeURIComponent(message)}`;

@@ -30,6 +30,7 @@ export const pt: Dictionary = {
     dateLabel: "Data e Hora Preferidas",
     submitButton: "Enviar Solicitação (SMS)",
     helperText: "Clicar neste botão abrirá seu aplicativo de mensagens com um texto pré-preenchido.",
+    smsTemplate: "Oi Sabrina, meu nome é {name}. Gostaria de agendar uma sessão de massagem para {date} às {time} em {city}.",
   },
   footer: {
     description: "Serviços Profissionais de Massagem Tântrica e Bem-Estar em Lowell, Middlesex County, MA. Dedicado ao seu relaxamento e crescimento pessoal.",
