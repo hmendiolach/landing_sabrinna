@@ -1,11 +1,13 @@
 "use client";
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { FaCalendarAlt } from 'react-icons/fa';
 
 export default function BookingForm() {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
+  const router = useRouter();
   
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,6 +23,11 @@ export default function BookingForm() {
     
     // Open SMS app
     window.location.href = `sms:+16176554053?&body=${encodeURIComponent(message)}`;
+
+    // Redirect to Thank You page after a short delay
+    setTimeout(() => {
+      router.push('/thank-you');
+    }, 1000);
   };
 
   return (
